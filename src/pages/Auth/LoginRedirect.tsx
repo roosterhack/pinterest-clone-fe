@@ -31,16 +31,22 @@ export const LoginRedirect = (props: any) => {
       })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res, "user");
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
         localStorage.setItem("jwt", res.jwt);
         localStorage.setItem("username", res.user.username);
+        localStorage.setItem("id", res.user.id);
         setText(
           "You have been successfully logged in. You will be redirected in a few seconds..."
         );
         dispatch({
           type: ACTIONS.LOGIN_SUCCESS,
-          payload: { username: res.user.username, auth_token: res.jwt },
+          payload: {
+            username: res.user.username,
+            auth_token: res.jwt,
+            user: res.user,
+          },
         });
         setTimeout(() => history.push("/"), 2000); // Redirect to homepage after 3 sec
       })

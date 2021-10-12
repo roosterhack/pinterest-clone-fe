@@ -6,19 +6,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LoginRedirect } from "./pages/Auth/LoginRedirect";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { AuthProvider, useAuthState } from "./components/context/AuthContext";
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
 
 function App() {
-  const { isLoggedIn } = useAuthState();
-
   return (
     <AuthProvider>
-      <GlobalStyle />
       <Router>
         <div className="App">
           <Nav />
@@ -30,11 +21,7 @@ function App() {
             />
             <Route path="/" exact component={Home} />
 
-            <ProtectedRoute
-              path="/mypins"
-              component={MyPins}
-              isLoggedIn={isLoggedIn}
-            />
+            <ProtectedRoute path="/mypins" component={MyPins} />
           </Switch>
         </div>
       </Router>

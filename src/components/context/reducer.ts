@@ -8,6 +8,7 @@ interface InitialStateProps {
   token: string;
   loading: boolean;
   errorMessage: any;
+  userData: any;
 }
 
 export const initialState = {
@@ -16,6 +17,7 @@ export const initialState = {
   token: "" || token,
   loading: false,
   errorMessage: null,
+  userData: null,
 };
 
 export const ACTIONS = {
@@ -35,6 +37,7 @@ export const AuthReducer = (initialState: InitialStateProps, action: any) => {
     case ACTIONS.LOGIN_SUCCESS:
       return {
         ...initialState,
+        userData: action.payload.user,
         username: action.payload.username,
         token: action.payload.auth_token,
         isLoggedIn: true,

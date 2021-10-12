@@ -7,6 +7,7 @@ interface AuthStateContextProps {
   loading: boolean;
   token: string;
   username: string;
+  userData: any;
 }
 
 export const AuthStateContext = createContext<AuthStateContextProps | any>({});

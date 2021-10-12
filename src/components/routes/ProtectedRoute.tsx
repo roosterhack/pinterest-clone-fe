@@ -1,18 +1,19 @@
 import { Route, Redirect } from "react-router-dom";
+import { useAuthState } from "../context/AuthContext";
 
 interface ProtectedRouteProps {
-  isLoggedIn: boolean;
   component: any;
   path: string;
 }
 
 const ProtectedRoute = ({
-  isLoggedIn,
   component: Component,
   ...rest
 }: ProtectedRouteProps) => {
+  const { isLoggedIn } = useAuthState();
   return (
     <Route
+      exact
       {...rest}
       render={(props: any) => {
         if (isLoggedIn) {
